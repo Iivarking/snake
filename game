@@ -1,0 +1,70 @@
+import turtle 
+import random
+  
+
+karl = turtle.Turtle() 
+karl.shape("square")
+karl.color("red")
+screen = turtle.Screen()
+screen.bgcolor("black")
+screen.setup(width=500, height=500)
+karl.direction = "stop"
+screen.tracer(0)
+
+
+def up():
+  if karl.direction != "down":
+        karl.direction = "up"
+
+def down(): 
+  if karl.direction != "up":
+        karl.direction = "down" 
+
+def left(): 
+  if karl.direction != "right":
+        karl.direction = "left"
+
+def right(): 
+  if karl.direction != "left":
+        karl.direction = "right"
+  
+def move():
+    if karl.direction == "up":
+        y = karl.ycor()
+        karl.sety(y+2)
+    if karl.direction == "down":
+        y = karl.ycor()
+        karl.sety(y-2)
+    if karl.direction == "left":
+        x = karl.xcor()
+        karl.setx(x-2)
+    if karl.direction == "right":
+        x = karl.xcor()
+        karl.setx(x+2)
+
+screen.listen() 
+karl.penup()
+
+screen.onkey(right, "Right") 
+screen.onkey(left, "Left") 
+screen.onkey(down, "Down") 
+screen.onkey(up, "Up") 
+
+# food in the game
+food = turtle.Turtle()
+food.color("green")
+food.shape("circle")
+food.speed(0)
+food.penup()
+food.goto(0, 100)
+
+while True:
+  screen.update()
+  move()
+  if karl.distance(food) < 20:
+    x = random.randint(-100, 100)
+    y = random.randint(-100, 100)
+    food.goto(x, y)
+  
+
+turtle.mainloop() 
